@@ -1,0 +1,52 @@
+extends ./../layout_plain
+
+block left_menu
+  +leftMenu("support")
+
+block content
+  div.ui.grid.stackable.divided
+    div.twelve.wide.column
+      div.segment.ui
+        h3.ui.dividing.header Tochka Mobile App
+        p You can access Tochka via Tor Browswer or install our Android application.
+        ul
+          li App is distributed as compiled .apk file as well as source code that you can review and compile yourself
+          li App automatically updates itself when new version is released
+          li New versions are released every 2-3 weeks
+          li App uses Orbot to access Tochka on Onion Network
+          li App handles encrypted communication wia OpenKeyChain
+          li Since app is distributed outside Google Play Store you would need to enable untrusted sources when installing it
+        div.ui.section.divider
+        h4 Screenshots
+          div.ui.grid.stackable
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-007.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-000.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-008.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-001.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-002.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-003.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-005.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-004.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-006.png"]
+            div.four.wide.column
+              img.ui.image.rounded[src="/img/app/thumb-300-009.png"]
+    div.four.wide.column.t-left-menu-items
+      div.ui.vertical.buttons.fluid
+        a.ui.dark-green.submit.large.button.fluid[href="/app/download"]
+          i.icon.download
+          | Download APK
+        a.ui.submit.large.black.button.fluid[href="http://qxklmrhx7qkzais6.onion/Tochka/tochka-mobile-app-android"]
+          i.icon.github
+          | Access Source Code
+        a.ui.red.large.button.fluid[href="http://qxklmrhx7qkzais6.onion/Tochka/tochka-mobile-app-android/issues"]
+          i.icon.bug
+          | Report Bug

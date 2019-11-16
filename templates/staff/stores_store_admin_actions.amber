@@ -1,0 +1,33 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("sellers")
+
+block content
+  $l = Localization
+  $v = ViewStore
+  div.ui.grid.stackable.divided.top-aligned
+    div.twelve.wide.column
+      div.ui.segment
+        h3.ui.dividing.header Admin Actions
+        form.ui.form[action="/staff/stores/"+ViewStore.Storename+"/suspend"][method="POST"]
+          button.ui.mini.button.secondary[type="submit"] Suspend
+        div.ui.section.divider
+        form.ui.form[action="/staff/stores/"+ViewStore.Storename+"/trusted"][method="POST"]
+          button.ui.mini.button.secondary[type="submit"] Trusted
+        div.ui.section.divider
+        form.ui.form[action="/staff/stores/"+ViewStore.Storename+"/gold"][method="POST"]
+          button.ui.mini.button.secondary[type="submit"] Grant Gold Account
+        div.ui.section.divider
+        form.ui.form[action="/staff/stores/"+ViewStore.Storename+"/silver"][method="POST"]
+          button.ui.mini.button.secondary[type="submit"] Grant Silver Account
+        div.ui.section.divider
+        form.ui.form[action="/staff/stores/"+ViewStore.Storename+"/bronze"][method="POST"]
+          button.ui.mini.button.secondary[type="submit"] Grant Bronze Account
+        div.ui.section.divider
+        form.ui.form[action="/staff/stores/"+ViewStore.Storename+"/free"][method="POST"]
+          button.ui.mini.button.secondary[type="submit"] Grant Free Account
+    div.four.wide.column.t-left-menu-items
+      import ./../store/mixin_store_card
+        div.user.info
+          +storeCard($v, $l)

@@ -1,0 +1,42 @@
+mixin leftMenu($section)
+  div.ui.menu.tiny.horizontal.four.item.top-menu.inverted.stackable
+    a.item.header-logo[href="/"]
+      +logo()
+    a.item[href="/app"][target="_blank"] 
+      i.icon.mobile
+      | Mobile App
+    a.item[href="/auth/register"]
+      [class="active"] ? SelectedSection == "register"
+      i.ui.icon.edit
+      | #{Localization.Layout.Register}
+    a.item[href="/auth/login"]
+      [class="active"] ? SelectedSection == "login"
+      i.ui.icon.sign.in
+      | #{Localization.Layout.Login}
+mixin logo()
+  span T
+  span.dark-green.point •
+  span c
+  span h
+  span k
+  span a
+
+doctype 5
+html
+  head
+    link[rel="stylesheet"][type="text/css"][href="/css/semantic.css"]
+    link[rel="stylesheet"][type="text/css"][href="/css/tochka.css"]
+    link[rel="shortcut icon"][href="/img/favicon.ico"]
+    title #{SiteName}
+    meta[name="viewport"][content="width=device-width, initial-scale=1"]
+    block meta
+  body
+    div.ui.container.grid.stackable
+      div.sixteen.wide.column.header-logo
+        block left_menu
+      div.sixteen.wide.column
+        div.tochka-container.ui.grid.stackable.divided
+          div.sixteen.wide.column
+            block content
+      block footer
+        import ./footer

@@ -1,0 +1,22 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("transactions")
+
+block content
+  p If you had registered as new user between June 3 and 6 and had made deposits to new user's wallet you can recover funds. You need to enter wallet address and if it's found it will be linked to your new account.
+  form.ui.form.segment[method="POST"]
+    [class="error"] ? Error
+    h3.ui.dividing.header Recover Transaction
+    if Error
+      div.ui.error.message
+        div.header #{Localization.Auth.Error}
+        p #{Error}
+      div.ui.section.divider
+    div.required.field
+      label Transaction Address
+      div.ui.icon.input
+        input[type="text"][name="address"][placeholder="address"][required]
+        i.user.icon
+    div.ui.section.divider
+    button.ui.dark-green.submit.button[type="submit"] Recover

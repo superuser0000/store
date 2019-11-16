@@ -1,0 +1,21 @@
+extends layout
+
+block menu
+  +topMenu("help")
+
+block left_menu
+  +leftMenu("help")
+
+block content
+  div.ui.grid.stackable.divided
+    div.twelve.wide.column
+      div.segment.static.ui
+        h3.ui.dividing.header.capitalize #{StaticPage.Title}
+        div #{StaticPage.Body}
+    div.four.wide.column.t-left-menu-items
+      div.ui.vertical.fluid.menu.tiny.basic.secondary
+        $section = SelectedSection
+        each $page in StaticPages 
+          a.item.capitalize[href="/help/"+$page.Filename] 
+            [class="active"] ? $page.Title == $section
+            | #{$page.Title}

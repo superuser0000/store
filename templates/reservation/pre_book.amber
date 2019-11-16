@@ -1,0 +1,74 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("")
+
+block content
+  $store = ViewStore
+  $l = Localization
+  $user = ViewUser
+  $item = ViewItem
+  div.ui.grid.stackable.centered.divided
+    div.twelve.wide.column
+      form.ui.segment.form.segment[method="POST"]
+        [class="error"] ? Error
+        h2.ui.dividing.header 
+          if $item.Score > 0.0
+            div.ui.label.right.floated.large
+              i.icon.thumbs.up
+              span #{$item.Score}
+          | #{$item.Name}
+        if Error
+          div.ui.error.message
+            div.header #{Localization.Auth.Error}
+            p #{Error}
+        div.field
+          label #{Localization.Items.Name}
+          span #{GroupAvailability.ItemName}
+        div.ui.section.divider
+        div.field
+          label #{Localization.Items.PackageName}
+          span #{GroupAvailability.PackageName}
+        if GroupAvailability.Type != "digital" && GroupAvailability.Type != "drop"
+          div.ui.section.divider
+          div.field
+            label Quantity
+            div.ui.input
+              input[type="number"][value="1"][name="quantity"]
+        if GroupAvailability.Type == "mail"
+          div.ui.section.divider
+          div.field
+            label Vendor PGP Key
+            pre #{$store.PGP}
+          div.ui.section.divider
+          div.field
+            label Shipping Address (Please encrypt using PGP key above)
+            textarea[name="shipping_address"]
+          if len($store.ShippingOptions) > 0
+            div.ui.section.divider
+            div.field
+              label Shipping Options
+              div.ui.left.input
+                select[name="shipping_id"]
+                  each $option in $store.ShippingOptions
+                    option[value=$option.ID] #{$option.Name} (+$#{$option.PriceUSD})
+        div.ui.section.divider
+        div.grouped.fields
+          label Currency
+          div.field
+            div.ui.radio.checkbox
+              input[type="radio"][name="type"][value="ethereum"][id="pay_via_ethereum"][checked]
+              label[for="pay_via_ethereum"] Pay with Ehrereum (#{GroupAvailability.PriceETHStr} ETH)
+          div.field
+            div.ui.radio.checkbox
+              input[type="radio"][name="type"][value="bitcoin"][id="pay_via_bitcoin"]
+              label[for="pay_via_bitcoin"] Pay with Bitcoin (#{GroupAvailability.PriceBTCStr} BTC)
+        div.ui.section.divider
+        div.field
+          button.ui.large.button.dark-green.submit[type="submit"] 
+            i.icon.cart
+            span #{$l.Items.Purchase}
+    div.four.wide.column.t-left-menu-items
+      import ./../store/mixin_store_card
+        div.user.info
+          +storeCard($store, $l)

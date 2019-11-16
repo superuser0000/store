@@ -1,0 +1,43 @@
+mixin storeCard($store, $localization)
+  div.ui.card
+    div.content.card-header
+      a.header[href="/store/"+$store.Storename] @#{$store.Storename}
+    div.image
+      img[src="/user-avatar/" + $store.Storename]
+    div.content
+      if $store.IsGoldAccount
+        span.ui.tiny.label.orange Gold Account
+      if $store.IsSilverAccount
+        span.ui.tiny.label.grey Silver Account
+      if $store.IsBronzeAccount
+        span.ui.tiny.label.brown Bronze Account
+      if $store.IsFreeAccount
+        span.ui.tiny.label Free Account
+      if $store.IsTrusted
+        span.ui.tiny.label Trusted  
+      if $store.Score > 0
+        div.ui.label.dark-green.tiny
+          i.icon.thumbs.up
+          span #{$store.Score}
+      if $store.HasDeposits
+        span.ui.tiny.teal.label Insured
+    if $store.ShortDescription != ""
+      div.content
+        div.description #{$store.ShortDescription}
+    div.extra.content
+      div.date 
+        i.icon.wait
+        span #{$localization.UserCard.Registred} #{$store.RegistrationDateStr}
+      div.date 
+        i.icon.wait
+        span #{$localization.UserCard.LastSeen} #{$store.LastLoginDateStr}
+    div.extra.content
+      a.ui.big.dark-green.button[href="/messages/"+$store.Storename] #{$localization.LeftMenu.PM}
+  if ViewUser.IsAdmin || ViewUser.IsStaff
+    div.ui.red.vertical.tiny.fluid.menu.inverted
+      span.item
+        strong Staff Menu
+      a.item[href="/staff/stores/"+$store.Storename+"/actions"] Admin Actions
+      a.item[href="/staff/stores/"+$store.Storename+"/payments"] Payments 
+      a.item[href="/staff/stores/"+$store.Storename+"/disputes"] Disputes 
+

@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: postgres:11
+    environment:
+      POSTGRES_DB: go_t
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 
+    expose:
+      - 5432
+  
+  app:
+    build:
+      .
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "go", "run", "main.go"]
+    volumes:
+      - .:/go/src/qxklmrhx7qkzais6.onion/Tochka/tochka-free-market
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    links:
+      - db
+    command: bash scripts/run.sh

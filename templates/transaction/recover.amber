@@ -1,0 +1,22 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("transactions")
+
+block content
+  p If you were affected by data loss by hardware failure and had made new transactions by new user between June 3 and 6 you can link that transaction to your new account. You have to know transaction address to do that.
+  form.ui.form.segment[method="POST"]
+    [class="error"] ? Error
+    h3.ui.dividing.header Recover Transaction
+    if Error
+      div.ui.error.message
+        div.header #{Localization.Auth.Error}
+        p #{Error}
+      div.ui.section.divider
+    div.required.field
+      label Transaction Address
+      div.ui.icon.input
+        input[type="text"][name="address"][placeholder="address"][required]
+        i.user.icon
+    div.ui.section.divider
+    button.ui.dark-green.submit.button[type="submit"] Recover

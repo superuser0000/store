@@ -1,0 +1,23 @@
+extends ./../layout_basic
+
+block left_menu
+  +leftMenu("login")
+
+block content
+  form.ui.form.segment[method="POST"]
+    [class="error"] ? Error
+    h3.ui.dividing.header Anti-Bot Check
+    if Error
+      div.ui.error.message
+        div.header #{Localization.Auth.Error}
+        p #{Error}
+      div.ui.section.divider
+    input[type="hidden"][name="captcha_id"][value=CaptchaId]
+    div.required.field
+      label #{Localization.Auth.Captcha}
+      div.ui.input
+        input[type="text"][name="captcha"][placeholder="captcha"][required]
+      div
+        img.ui.medium.image.captcha[width=300][height=100][src="/captcha/"+CaptchaId]
+    div.ui.section.divider
+    button.ui.dark-green.submit.button[type="submit"] I am not a robot and not a cop
